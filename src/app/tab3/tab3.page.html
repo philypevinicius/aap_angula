@@ -16,5 +16,8 @@
     </ion-toolbar>
   </ion-header>
 
-  <app-explore-container name="Tab 3 page"></app-explore-container>
+  <label for="Image">Image file</label>
+  <input type="file" (change)="upload($event)" accept="*.png.jpg.mp4" id="">
+  <button (click)="uploadImage()">Upload Image</button>
 </ion-content>
+

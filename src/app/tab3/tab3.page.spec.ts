@@ -23,3 +23,15 @@ describe('Tab3Page', () => {
     expect(component).toBeTruthy();
   });
 });
+
+export class AppComponent {
+
+  upload($event){
+
+  }
+
+  uploadImage(){
+
+  }
+
+}
