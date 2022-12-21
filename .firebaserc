@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "album-phc-527ad": {
+      "hosting": {
+        "app": [
+          "album-phc-527ad"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "album-phc-527ad"
+  }
+}
