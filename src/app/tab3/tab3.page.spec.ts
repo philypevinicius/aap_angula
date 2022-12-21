@@ -1,7 +1,6 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
-
 import { Tab3Page } from './tab3.page';
 
 describe('Tab3Page', () => {
@@ -24,14 +23,3 @@ describe('Tab3Page', () => {
   });
 });
 
-export class AppComponent {
-
-  upload($event){
-
-  }
-
-  uploadImage(){
-
-  }
-
-}

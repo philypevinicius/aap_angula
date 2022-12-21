@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
 
 @Component({
   selector: 'app-tab3',
@@ -7,6 +8,18 @@ import { Component } from '@angular/core';
 })
 export class Tab3Page {
 
-  constructor() {}
+  path:string
+
+  constructor(private af:AngularFireStorage){}
+
+  upload($event){
+    this.path = $event.target.files[0]
+  }
+
+  uploadImage(){
+    console.log(this.path)
+
+    this.af.upload("/files"+Math.random()+this.path,this.path)
+  }
 
 }
