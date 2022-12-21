@@ -1,0 +1,61 @@
+.body{
+  background: linear-gradient(270deg, #341677, #a32f80, #ff6363, #400d51);
+    background-size: 800% 800%;
+
+    -webkit-animation: AnimationName 19s ease infinite;
+    -moz-animation: AnimationName 19s ease infinite;
+    animation: AnimationName 19s ease infinite;
+}
+
+@-webkit-keyframes AnimationName {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+@-moz-keyframes AnimationName {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+@keyframes AnimationName {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+
+}
+.ion-header-bar{
+  background-image: linear-gradient(
+        40deg,
+        #00fffc 0%,
+        #fc00ff 45%,
+        #fffc00 100%
+      );
+}
+ion-title{
+  text-align: center;
+  font-family: Arial;
+  font-style:italic;
+
+  color:#fafcfd;
+  font-size: 25px
+}
+ion-button {
+  --background:#00fffc 0%,
+  #fc00ff 45%,
+  #fffc00 100%;
+
+
+
+
+  --border-radius: 0;
+  --border-color: #000;
+  --border-style: solid;
+  --border-width: 1px;
+
+  --box-shadow: 0 2px 6px 0 rgb(0, 0, 0, 0.25);
+
+
+
+  --padding-top: 10px;
+  --padding-bottom: 10px;
+}

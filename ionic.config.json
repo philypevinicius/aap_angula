@@ -1,0 +1,7 @@
+{
+  "name": "album",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
