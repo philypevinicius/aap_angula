@@ -1,5 +1,9 @@
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase } from '@angular/fire/compat/database';
+import {
+  AngularFireDatabase,
+  SnapshotAction,
+} from '@angular/fire/compat/database';
+import { Observable } from 'rxjs';
 import { Album } from '../types/album';
 import { Registro } from '../types/registro';
 import { TipoRegistro } from '../types/tipo-registro';
@@ -40,7 +44,13 @@ export class DbService {
       );
   }
 
-  getRegistros(tipo: TipoRegistro) {
-    return this.db.list<Registro<Album>>(tipo).valueChanges();
+  getRegistros(
+    tipo: TipoRegistro
+  ): Observable<SnapshotAction<Registro<Album>>[]> {
+    return this.db.list<Registro<Album>>(tipo).snapshotChanges();
+  }
+
+  deleteRegistro(tipo: TipoRegistro, key: string) {
+    this.db.list(tipo).remove(key);
   }
 }

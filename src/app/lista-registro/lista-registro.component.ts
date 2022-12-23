@@ -1,13 +1,13 @@
+import { CommonModule } from '@angular/common';
+import { Component, Input, OnInit } from '@angular/core';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { IonicModule } from '@ionic/angular';
-import { Component, Input, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { take } from 'rxjs/operators';
 import { DbService } from '../shared/db.service';
 import { StorageService } from '../shared/storage.service';
 import { Album } from '../types/album';
 import { Registro } from '../types/registro';
 import { TipoRegistro } from '../types/tipo-registro';
-import { CommonModule } from '@angular/common';
 
 @Component({
   standalone: true,
@@ -20,15 +20,47 @@ export class ListaRegistroComponent implements OnInit {
   @Input() tipo: TipoRegistro;
   @Input() filtro = '';
 
-  list: Observable<Registro<Album>[]>;
+  list: Registro<Album>[] = [];
 
   constructor(private db: DbService, private storage: StorageService) {}
 
   ngOnInit(): void {
-    this.list = this.db.getRegistros(this.tipo);
+    this.db.getRegistros(this.tipo).subscribe({
+      next: (actions) => {
+        this.list = actions.map((action) => {
+          return {
+            ...action.payload.val(),
+            key: action.key,
+          };
+        });
+      },
+    });
   }
 
   getImagem(filePath: string) {
     return this.storage.downloadImage(filePath);
+  }
+
+  delete(registro: Registro<Album>) {
+    if (registro.dados?.imagem) {
+      this.deleteImage(registro);
+    } else {
+      this.delete(registro);
+    }
+  }
+
+  private deleteImage(registro: Registro<Album>) {
+    this.storage
+      .delete(registro.dados.imagem)
+      .pipe(take(1))
+      .subscribe({
+        next: () => {
+          this.deleteRegistro(registro);
+        },
+      });
+  }
+
+  private deleteRegistro(registro: Registro<Album>) {
+    this.db.deleteRegistro(this.tipo, registro.key);
   }
 }

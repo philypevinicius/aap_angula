@@ -26,7 +26,11 @@ export class StorageService {
       );
   }
 
-  async downloadImage(filePath: string) {
-    this.af.ref(filePath).getDownloadURL();
+  downloadImage(filePath: string) {
+    return this.af.ref(filePath).getDownloadURL();
+  }
+
+  delete(filePath: string) {
+    return this.af.ref(filePath).delete();
   }
 }
