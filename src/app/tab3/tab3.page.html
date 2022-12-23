@@ -17,6 +17,7 @@
   </ion-header>
 
   <form [formGroup]="formulario" (ngSubmit)="createAlbum($event)">
+    <ion-card style="text-align:center">
     <ion-item>
       <ion-select placeholder="Selecione o tipo" formControlName="tipo">
         <ion-select-option value="Viagem">Viagem</ion-select-option>
@@ -62,9 +63,10 @@
       >
       </ion-input>
     </ion-item>
-
-    <ion-button type="submit" [disabled]="!formulario.valid">
-      Gravar
+    <br>
+    <ion-button color="success" shape="round" style="width:50%;height:50px;" type="submit" [disabled]="!formulario.valid">
+      <ion-icon name="save"></ion-icon>
     </ion-button>
+  </ion-card>
   </form>
 </ion-content>
