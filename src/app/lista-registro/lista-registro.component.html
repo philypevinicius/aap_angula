@@ -1,0 +1,17 @@
+<ion-content>
+  <ion-list *ngFor="let i of list | async">
+    <ion-item>
+      <div *ngIf="tipo !== 'Videos' && i.dados?.imagem">
+        <img
+          slot="start"
+          style="width: 100px !important"
+          [src]="i.dados.imagem | getDownloadURL"
+        />
+      </div>
+      <div *ngIf="tipo === 'Videos' && i.dados?.imagem">
+        <video [src]="i.dados.imagem | getDownloadURL"></video>
+      </div>
+      <div>{{ i.dados.title }}</div>
+    </ion-item>
+  </ion-list>
+</ion-content>
