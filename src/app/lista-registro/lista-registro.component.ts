@@ -18,6 +18,7 @@ import { CommonModule } from '@angular/common';
 })
 export class ListaRegistroComponent implements OnInit {
   @Input() tipo: TipoRegistro;
+  @Input() filtro = '';
 
   list: Observable<Registro<Album>[]>;
 

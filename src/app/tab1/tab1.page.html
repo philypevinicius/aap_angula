@@ -1,25 +1,19 @@
 <ion-header class="ion-header-bar">
-  <ion-toolbar color="40deg,
+  <ion-toolbar
+    color="40deg,
   #00fffc 0%,
   #fc00ff 45%,
-  #fffc00 100%">
-    <ion-title>
-      Relacionamento
-    </ion-title>
+  #fffc00 100%"
+  >
+    <ion-title> Relacionamento </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content>
   <ion-list>
-    <ion-button>1 Ano</ion-button>
+    <button [routerLink]="['ano1']">1</button>
+    <button [routerLink]="['ano2']">2</button>
+    <button [routerLink]="['ano3']">3</button>
+    <button [routerLink]="['ano4']">4</button>
   </ion-list>
 </ion-content>
-
-
-
-
-
-
-
-
-

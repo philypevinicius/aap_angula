@@ -1,6 +1,6 @@
 <ion-content>
   <ion-list *ngFor="let i of list | async">
-    <ion-item>
+    <ion-item *ngIf="!filtro || i.album === filtro">
       <div *ngIf="tipo !== 'Videos' && i.dados?.imagem">
         <img
           slot="start"

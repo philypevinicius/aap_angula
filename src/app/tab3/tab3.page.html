@@ -1,11 +1,11 @@
 <ion-header class="ion-header-bar">
-  <ion-toolbar color="40deg,
+  <ion-toolbar
+    color="40deg,
   #00fffc 0%,
   #fc00ff 45%,
-  #fffc00 100%">
-    <ion-title>
-      Cadastro
-    </ion-title>
+  #fffc00 100%"
+  >
+    <ion-title> Cadastro </ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -16,8 +16,55 @@
     </ion-toolbar>
   </ion-header>
 
-  <label for="Image">Image file</label>
-  <input type="file" (change)="upload($event)" accept="*.png.jpg.mp4" id="">
-  <button (click)="uploadImage()">Upload Image</button>
-</ion-content>
+  <form [formGroup]="formulario" (ngSubmit)="createAlbum($event)">
+    <ion-item>
+      <ion-select placeholder="Selecione o tipo" formControlName="tipo">
+        <ion-select-option value="Viagem">Viagem</ion-select-option>
+        <ion-select-option value="Relacionamento">
+          Relacionamento
+        </ion-select-option>
+        <ion-select-option value="Videos">Videos</ion-select-option>
+        <ion-select-option value="Anotacoes">Anotacoes</ion-select-option>
+      </ion-select>
+    </ion-item>
 
+    <ion-item>
+      <ion-label>Titulo </ion-label>
+      <ion-input type="text" formControlName="title"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Descricao </ion-label>
+      <ion-input type="text" formControlName="descricao"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Data</ion-label>
+      <ion-input type="text" formControlName="data"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Album</ion-label>
+      <ion-select placeholder="Selecione o album" formControlName="album">
+        <ion-select-option value="default">Padrão</ion-select-option>
+        <ion-select-option value="ano1">1</ion-select-option>
+        <ion-select-option value="ano2">2</ion-select-option>
+        <ion-select-option value="ano3">3</ion-select-option>
+        <ion-select-option value="ano4">4</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-input
+        type="file"
+        (change)="selectToUpload($event)"
+        accept="*.png.jpg.mp4"
+      >
+      </ion-input>
+    </ion-item>
+
+    <ion-button type="submit" [disabled]="!formulario.valid">
+      Gravar
+    </ion-button>
+  </form>
+</ion-content>
