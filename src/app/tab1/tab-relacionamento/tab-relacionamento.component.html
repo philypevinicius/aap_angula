@@ -5,25 +5,13 @@
     #fc00ff 45%,
     #fffc00 100%"
   >
+  <ion-button color="light" size="large" style="width:70%;height:60px;" [routerLink]="['tab1']">voltar</ion-button>
     <ion-title> Relacionamento </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-card>
-    <img src="./madison.jpg" />
-    <ion-card-header>
-      <ion-card-title>descricao</ion-card-title>
-    </ion-card-header>
-    <ion-item>
-      <ion-icon name="ribbon" slot="start"></ion-icon>
-      <ion-label>titulo</ion-label>
-    </ion-item>
 
-    <ion-item>
-      <ion-icon name="calendar" slot="start"></ion-icon>
-      <ion-label>data</ion-label>
-    </ion-item>
-  </ion-card>
   <app-lista-registro tipo="Relacionamento" [filtro]="ano"></app-lista-registro>
+
 </ion-content>

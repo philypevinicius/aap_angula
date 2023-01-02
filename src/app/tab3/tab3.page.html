@@ -36,16 +36,15 @@
 
     <ion-item>
       <ion-label>Descricao </ion-label>
-      <ion-input type="text" formControlName="descricao"></ion-input>
+      <ion-input type="text" formControlName="descricao" placeholder="Campo utilizado apenas para relacionamento" ></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label>Data</ion-label>
-      <ion-input type="text" formControlName="data"></ion-input>
+      <ion-input type="date" formControlName="data"></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-label>Album</ion-label>
       <ion-select placeholder="Selecione o album" formControlName="album">
         <ion-select-option value="default">Padrão</ion-select-option>
         <ion-select-option value="ano1">1</ion-select-option>

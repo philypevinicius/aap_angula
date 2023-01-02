@@ -1,21 +1,33 @@
 <ion-content>
   <ion-list *ngFor="let i of list">
     <ion-item *ngIf="!filtro || i.album === filtro">
-      <div *ngIf="tipo !== 'Videos' && i.dados?.imagem">
-        <img
-          slot="start"
-          style="width: 100px !important"
-          [src]="i.dados.imagem | getDownloadURL"
-        />
-      </div>
-      <div *ngIf="tipo === 'Videos' && i.dados?.imagem">
-        <video [src]="i.dados.imagem | getDownloadURL"></video>
-      </div>
-      <div>{{ i.dados.title }}</div>
+      <ion-card style="display: inline-block;">
+        <ion-button (click)="delete(i)">
+          <ion-icon name="close" slot="icon-only"></ion-icon>
+        </ion-button>
+        <div *ngIf="tipo === 'Videos' && i.dados?.imagem">
+          <video [src]="i.dados.imagem | getDownloadURL"></video>
+        </div>
+        <div *ngIf="tipo !== 'Videos' && i.dados?.imagem">
+          <img
+            slot="start"
+            style="width: 100% !important"
+            [src]="i.dados.imagem | getDownloadURL"
+          />
+        </div>
+        <ion-card-header>
+          <ion-card-title>{{ i.dados.descricao }}</ion-card-title>
+        </ion-card-header>
+        <ion-item>
+          <ion-icon name="ribbon" slot="start"></ion-icon>
+          <ion-label>{{ i.dados.title }}</ion-label>
+        </ion-item>
 
-      <ion-button (click)="delete(i)">
-        <ion-icon name="close" slot="icon-only"></ion-icon>
-      </ion-button>
+        <ion-item>
+          <ion-icon name="calendar" slot="start"></ion-icon>
+          <ion-label>{{ i.dados.data }}</ion-label>
+        </ion-item>
+      </ion-card>
     </ion-item>
   </ion-list>
 </ion-content>
