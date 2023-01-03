@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { LoadingController } from '@ionic/angular';
+import { AlertController, LoadingController } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root',
@@ -7,7 +7,10 @@ import { LoadingController } from '@ionic/angular';
 export class CommonService {
   private loading: HTMLIonLoadingElement;
 
-  constructor(private readonly loadingControl: LoadingController) {}
+  constructor(
+    private readonly loadingControl: LoadingController,
+    private readonly alertControl: AlertController
+  ) {}
 
   async showLoader(message = 'Carregando...'): Promise<void> {
     this.loading = await this.loadingControl.create({
@@ -19,5 +22,18 @@ export class CommonService {
 
   closeLoader(): void {
     this.loading.dismiss();
+  }
+
+  async showAlert(
+    header: string,
+    message: string,
+    handler: () => any
+  ): Promise<void> {
+    const alert = await this.alertControl.create({
+      header,
+      message,
+      buttons: [{ text: 'OK', handler }],
+    });
+    await alert.present();
   }
 }
