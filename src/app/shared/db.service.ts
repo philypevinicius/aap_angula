@@ -50,7 +50,15 @@ export class DbService {
     return this.db.list<Registro<Album>>(tipo).snapshotChanges();
   }
 
-  deleteRegistro(tipo: TipoRegistro, key: string) {
-    this.db.list(tipo).remove(key);
+  deleteRegistro(tipo: TipoRegistro, key: string): Promise<void> {
+    return this.db.list<Registro<Album>>(tipo).remove(key);
+  }
+
+  updateRegistro(
+    tipo: TipoRegistro,
+    key: string,
+    data: Partial<Registro<Album>>
+  ): Promise<void> {
+    return this.db.list<Registro<Album>>(tipo).update(key, data);
   }
 }
