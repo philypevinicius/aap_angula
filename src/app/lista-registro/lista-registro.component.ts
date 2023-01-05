@@ -3,6 +3,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { IonicModule } from '@ionic/angular';
 import { take } from 'rxjs/operators';
+import { CommonService } from '../shared/common.service';
 import { DbService } from '../shared/db.service';
 import { StorageService } from '../shared/storage.service';
 import { Album } from '../types/album';
@@ -22,7 +23,11 @@ export class ListaRegistroComponent implements OnInit {
 
   list: Registro<Album>[] = [];
 
-  constructor(private db: DbService, private storage: StorageService) {}
+  constructor(
+    private db: DbService,
+    private storage: StorageService,
+    private common: CommonService
+  ) {}
 
   ngOnInit(): void {
     this.db.getRegistros(this.tipo).subscribe({
@@ -61,6 +66,8 @@ export class ListaRegistroComponent implements OnInit {
   }
 
   private deleteRegistro(registro: Registro<Album>) {
-    this.db.deleteRegistro(this.tipo, registro.key);
+    this.common.showAlert('Atenção!', 'Deseja excluir?', () =>
+      this.db.deleteRegistro(this.tipo, registro.key)
+    );
   }
 }
