@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
-import { IonicModule } from '@ionic/angular';
+import { IonicModule, NavController } from '@ionic/angular';
 import { take } from 'rxjs/operators';
 import { CommonService } from '../shared/common.service';
 import { DbService } from '../shared/db.service';
@@ -26,7 +26,8 @@ export class ListaRegistroComponent implements OnInit {
   constructor(
     private db: DbService,
     private storage: StorageService,
-    private common: CommonService
+    private common: CommonService,
+    private router: NavController
   ) {}
 
   ngOnInit(): void {
@@ -69,5 +70,11 @@ export class ListaRegistroComponent implements OnInit {
     this.common.showAlert('Atenção!', 'Deseja excluir?', () =>
       this.db.deleteRegistro(this.tipo, registro.key)
     );
+  }
+
+  editar(registro: Registro<Album>): void {
+    this.db
+      .updateRegistro(registro.dados., registro.key, registro)
+      .then()
   }
 }

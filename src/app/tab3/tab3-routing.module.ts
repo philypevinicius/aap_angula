@@ -6,11 +6,15 @@ const routes: Routes = [
   {
     path: '',
     component: Tab3Page,
-  }
+  },
+  {
+    path: ':editar',
+    component: Tab3Page,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class Tab3PageRoutingModule {}

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { DbService } from '../shared/db.service';
 import { StorageService } from '../shared/storage.service';
 
@@ -10,9 +11,11 @@ import { StorageService } from '../shared/storage.service';
 })
 export class Tab3Page implements OnInit {
   formulario: UntypedFormGroup;
+  edicao = false;
   path = '';
 
   constructor(
+    private route: ActivatedRoute,
     private storage: StorageService,
     private db: DbService,
     private fb: FormBuilder
@@ -26,6 +29,13 @@ export class Tab3Page implements OnInit {
       album: [''],
       imagem: [''],
       tipo: ['', [Validators.required]],
+    });
+    this.route.params.subscribe({
+      next: ({ editar }) => {
+        if (editar) {
+          this.edicao = true;
+        }
+      },
     });
   }
 

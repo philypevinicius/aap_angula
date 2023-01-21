@@ -17,55 +17,66 @@
   </ion-header>
 
   <form [formGroup]="formulario" (ngSubmit)="createAlbum($event)">
-    <ion-card style="text-align:center">
-    <ion-item>
-      <ion-select placeholder="Selecione o tipo" formControlName="tipo">
-        <ion-select-option value="Viagem">Viagem</ion-select-option>
-        <ion-select-option value="Relacionamento">
-          Relacionamento
-        </ion-select-option>
-        <ion-select-option value="Videos">Videos</ion-select-option>
-        <ion-select-option value="Anotacoes">Anotacoes</ion-select-option>
-      </ion-select>
-    </ion-item>
+    <ion-card style="text-align: center">
+      <ion-item>
+        <ion-select placeholder="Selecione o tipo" formControlName="tipo">
+          <ion-select-option value="Viagem">Viagem</ion-select-option>
+          <ion-select-option value="Relacionamento">
+            Relacionamento
+          </ion-select-option>
+          <ion-select-option value="Videos">Videos</ion-select-option>
+          <ion-select-option value="Anotacoes">Anotacoes</ion-select-option>
+        </ion-select>
+      </ion-item>
 
-    <ion-item>
-      <ion-label>Titulo </ion-label>
-      <ion-input type="text" formControlName="title"></ion-input>
-    </ion-item>
+      <ion-item>
+        <ion-label>Titulo </ion-label>
+        <ion-input type="text" formControlName="title"></ion-input>
+      </ion-item>
 
-    <ion-item>
-      <ion-label>Descricao </ion-label>
-      <ion-input type="text" formControlName="descricao" placeholder="Campo utilizado apenas para relacionamento" ></ion-input>
-    </ion-item>
+      <ion-item>
+        <ion-label>Descricao </ion-label>
+        <ion-input
+          type="text"
+          formControlName="descricao"
+          placeholder="Campo utilizado apenas para relacionamento"
+        ></ion-input>
+      </ion-item>
 
-    <ion-item>
-      <ion-label>Data</ion-label>
-      <ion-input type="date" formControlName="data"></ion-input>
-    </ion-item>
+      <ion-item>
+        <ion-label>Data</ion-label>
+        <ion-input type="date" formControlName="data"></ion-input>
+      </ion-item>
 
-    <ion-item>
-      <ion-select placeholder="Selecione o album" formControlName="album">
-        <ion-select-option value="default">Padrão</ion-select-option>
-        <ion-select-option value="ano1">1</ion-select-option>
-        <ion-select-option value="ano2">2</ion-select-option>
-        <ion-select-option value="ano3">3</ion-select-option>
-        <ion-select-option value="ano4">4</ion-select-option>
-      </ion-select>
-    </ion-item>
+      <ion-item>
+        <ion-select placeholder="Selecione o album" formControlName="album">
+          <ion-select-option value="default">Padrão</ion-select-option>
+          <ion-select-option value="ano1">1</ion-select-option>
+          <ion-select-option value="ano2">2</ion-select-option>
+          <ion-select-option value="ano3">3</ion-select-option>
+          <ion-select-option value="ano4">4</ion-select-option>
+        </ion-select>
+      </ion-item>
 
-    <ion-item>
-      <ion-input
-        type="file"
-        (change)="selectToUpload($event)"
-        accept="*.png.jpg.mp4"
+      <ion-item>
+        <ion-input
+          type="file"
+          (change)="selectToUpload($event)"
+          accept="*.png.jpg.mp4"
+          [disabled]="edicao"
+        >
+        </ion-input>
+      </ion-item>
+      <br />
+      <ion-button
+        color="success"
+        shape="round"
+        style="width: 50%; height: 50px"
+        type="submit"
+        [disabled]="!formulario.valid"
       >
-      </ion-input>
-    </ion-item>
-    <br>
-    <ion-button color="success" shape="round" style="width:50%;height:50px;" type="submit" [disabled]="!formulario.valid">
-      <ion-icon name="save"></ion-icon>
-    </ion-button>
-  </ion-card>
+        <ion-icon name="save"></ion-icon>
+      </ion-button>
+    </ion-card>
   </form>
 </ion-content>
