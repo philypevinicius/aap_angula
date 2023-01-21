@@ -1,10 +1,14 @@
 <ion-content>
   <ion-list *ngFor="let i of list">
     <ion-item *ngIf="!filtro || i.album === filtro">
-      <ion-card style="display: inline-block;">
+      <ion-card style="display: inline-block">
         <ion-button (click)="delete(i)">
           <ion-icon name="close" slot="icon-only"></ion-icon>
         </ion-button>
+        <ion-button (click)="editar(i)">
+          <ion-icon name="create-outline" slot="icon-only"></ion-icon>
+        </ion-button>
+
         <div *ngIf="tipo === 'Videos' && i.dados?.imagem">
           <video [src]="i.dados.imagem | getDownloadURL"></video>
         </div>

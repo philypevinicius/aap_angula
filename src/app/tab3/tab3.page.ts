@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { NavController } from '@ionic/angular';
 import { DbService } from '../shared/db.service';
+import { EditarService } from '../shared/editar.service';
 import { StorageService } from '../shared/storage.service';
 
 @Component({
@@ -17,8 +19,10 @@ export class Tab3Page implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private storage: StorageService,
-    private db: DbService,
-    private fb: FormBuilder
+    private editarS: EditarService,
+    private router: NavController,
+    private fb: FormBuilder,
+    private db: DbService
   ) {}
 
   ngOnInit() {
@@ -34,6 +38,17 @@ export class Tab3Page implements OnInit {
       next: ({ editar }) => {
         if (editar) {
           this.edicao = true;
+          const e = this.editarS.pegarRegistro;
+          const t = this.editarS.pegarTipo;
+          console.log('e', e);
+          this.formulario.patchValue({
+            title: e.dados?.title,
+            descricao: e.dados.descricao,
+            data: e.dados.data,
+            album: e.album,
+            imagem: e.dados.imagem,
+            tipo: t,
+          });
         }
       },
     });
@@ -49,15 +64,31 @@ export class Tab3Page implements OnInit {
 
   createAlbum(event) {
     console.log(event);
+    const f: { [key: string]: any } = this.formulario.getRawValue();
 
-    const f = this.formulario.getRawValue();
-
-    if (f.album && this.path) {
-      this.uploadImage().then((filePath) => {
-        this.saveAlbum(f, filePath);
+    if (this.edicao) {
+      const e = this.editarS.pegarRegistro;
+      const t = this.editarS.pegarTipo;
+      const r = {
+        album: f['album'],
+        dados: {
+          title: f['title'],
+          descricao: f['descricao'],
+          data: f['data'],
+          imagem: e.dados.imagem,
+        },
+      };
+      this.db.updateRegistro(t, e.key, r).then(() => {
+        this.router.pop();
       });
     } else {
-      this.saveAlbum(f);
+      if (f.album && this.path) {
+        this.uploadImage().then((filePath) => {
+          this.saveAlbum(f, filePath);
+        });
+      } else {
+        this.saveAlbum(f);
+      }
     }
   }
 

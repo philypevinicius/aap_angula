@@ -19,7 +19,11 @@
   <form [formGroup]="formulario" (ngSubmit)="createAlbum($event)">
     <ion-card style="text-align: center">
       <ion-item>
-        <ion-select placeholder="Selecione o tipo" formControlName="tipo">
+        <ion-select
+          placeholder="Selecione o tipo"
+          formControlName="tipo"
+          [disabled]="edicao"
+        >
           <ion-select-option value="Viagem">Viagem</ion-select-option>
           <ion-select-option value="Relacionamento">
             Relacionamento

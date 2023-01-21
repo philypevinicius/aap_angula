@@ -5,6 +5,7 @@ import { IonicModule, NavController } from '@ionic/angular';
 import { take } from 'rxjs/operators';
 import { CommonService } from '../shared/common.service';
 import { DbService } from '../shared/db.service';
+import { EditarService } from '../shared/editar.service';
 import { StorageService } from '../shared/storage.service';
 import { Album } from '../types/album';
 import { Registro } from '../types/registro';
@@ -27,7 +28,8 @@ export class ListaRegistroComponent implements OnInit {
     private db: DbService,
     private storage: StorageService,
     private common: CommonService,
-    private router: NavController
+    private router: NavController,
+    private editarS: EditarService
   ) {}
 
   ngOnInit(): void {
@@ -48,11 +50,14 @@ export class ListaRegistroComponent implements OnInit {
   }
 
   delete(registro: Registro<Album>) {
-    if (registro.dados?.imagem) {
-      this.deleteImage(registro);
-    } else {
-      this.delete(registro);
-    }
+    this.common.showAlert('Atenção!', 'Deseja excluir?', () => {
+      this.db.deleteRegistro(this.tipo, registro.key);
+      if (registro.dados?.imagem) {
+        this.deleteImage(registro);
+      } else {
+        this.db.deleteRegistro(this.tipo, registro.key);
+      }
+    });
   }
 
   private deleteImage(registro: Registro<Album>) {
@@ -61,20 +66,14 @@ export class ListaRegistroComponent implements OnInit {
       .pipe(take(1))
       .subscribe({
         next: () => {
-          this.deleteRegistro(registro);
+          this.db.deleteRegistro(this.tipo, registro.key);
         },
       });
   }
 
-  private deleteRegistro(registro: Registro<Album>) {
-    this.common.showAlert('Atenção!', 'Deseja excluir?', () =>
-      this.db.deleteRegistro(this.tipo, registro.key)
-    );
-  }
-
   editar(registro: Registro<Album>): void {
-    this.db
-      .updateRegistro(registro.dados., registro.key, registro)
-      .then()
+    this.editarS.paraEditar = registro;
+    this.editarS.tipoParaEditar = this.tipo;
+    this.router.navigateForward(['tabs/tab3/e']);
   }
 }
