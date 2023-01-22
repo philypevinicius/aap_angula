@@ -72,8 +72,9 @@ export class ListaRegistroComponent implements OnInit {
   }
 
   editar(registro: Registro<Album>): void {
+    this.common.showAlert('Atenção!', 'Deseja editar?', () => {
     this.editarS.paraEditar = registro;
     this.editarS.tipoParaEditar = this.tipo;
     this.router.navigateForward(['tabs/tab3/e']);
-  }
+    });}
 }
