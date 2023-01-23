@@ -10,7 +10,7 @@
         </ion-button>
 
         <div *ngIf="tipo === 'Videos' && i.dados?.imagem">
-          <video [src]="i.dados.imagem | getDownloadURL"></video>
+          <video controls [src]="i.dados.imagem | getDownloadURL"></video>
         </div>
         <div *ngIf="tipo !== 'Videos' && i.dados?.imagem">
           <img
