@@ -4,12 +4,6 @@
 
 export const environment = {
   production: false,
-
-  "styles": [
-    "node_modules/@videogular/ngx-videogular/fonts/videogular.css",
-    "styles.scss"
-],
-
 };
 
 
