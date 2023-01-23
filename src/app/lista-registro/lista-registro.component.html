@@ -10,7 +10,9 @@
         </ion-button>
 
         <div *ngIf="tipo === 'Videos' && i.dados?.imagem">
-          <video [src]="i.dados.imagem | getDownloadURL"></video>
+          <vg-player>
+          <video [vgMedia]="$any(media)" #media id="singleVideo" preload="auto" controls [src]="i.dados.imagem | getDownloadURL"></video>
+        </vg-player>
         </div>
         <div *ngIf="tipo !== 'Videos' && i.dados?.imagem">
           <img

@@ -3,8 +3,16 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+
+  "styles": [
+    "node_modules/@videogular/ngx-videogular/fonts/videogular.css",
+    "styles.scss"
+],
+
 };
+
+
 
 /*
  * For easier debugging in development mode, you can import the following file
