@@ -79,12 +79,13 @@ export class Tab3Page implements OnInit {
         },
       };
       this.db.updateRegistro(t, e.key, r).then(() => {
-        this.router.pop();
+        this.router.navigateForward(['tabs/tab1']);
       });
     } else {
       if (f.album && this.path) {
         this.uploadImage().then((filePath) => {
           this.saveAlbum(f, filePath);
+          this.router.navigateForward(['tabs/tab1']);
         });
       } else {
         this.saveAlbum(f);

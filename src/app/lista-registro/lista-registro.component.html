@@ -29,7 +29,7 @@
 
         <ion-item>
           <ion-icon name="calendar" slot="start"></ion-icon>
-          <ion-label>{{ i.dados.data }}</ion-label>
+          <ion-label>{{ i.dados.data | date: 'dd / MM / yyyy'}}</ion-label>
         </ion-item>
       </ion-card>
     </ion-item>
